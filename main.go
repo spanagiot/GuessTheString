@@ -11,7 +11,7 @@ var nameToGuess = "To be or not to be"
 var population [100]string
 var fitnessScore [100]int
 var matingPool [100]string
-var birthplace [100]string
+var birthpool [100]string
 
 func main() {
 	var maxFitness int = 0
@@ -19,20 +19,18 @@ func main() {
 	var iterations int = 0
 	rand.Seed(time.Now().UTC().UnixNano())
 	fmt.Println("\tGenetic Algorithm - Guess the name")
-	fmt.Println("\tCreated by: Spyros Steel")
 	initializePopulation(population[:])
 	for true {
 		iterations += 1
 		maxFitness = 0
 		fitnessSum = 0
-		fmt.Printf("Population: %s\r", population[1])
 		for i := 0; i < len(population); i++ {
 			fitnessScore[i] = calculateAndReturnFitness(population[i])
 			fitnessSum += fitnessScore[i]
 			if fitnessScore[i] > maxFitness {
 				maxFitness = fitnessScore[i]
 				if maxFitness > 2 {
-					fmt.Printf("New max fitness: %d with value: %s\n",
+					fmt.Printf("New max fitness: %d with value: %s\r",
 						maxFitness, population[i])
 				}
 			}
@@ -61,11 +59,11 @@ func giveBirth() {
 		secondRandomParent = rand.Intn(len(matingPool))
 		firstOffspring, secondOffspring = createOffspring(
 			matingPool[firstRandomParent], matingPool[secondRandomParent])
-		birthplace[i] = firstOffspring
-		birthplace[i+1] = secondOffspring
+		birthpool[i] = firstOffspring
+		birthpool[i+1] = secondOffspring
 	}
 	for i := 0; i < len(population); i++ {
-		population[i] = birthplace[i]
+		population[i] = birthpool[i]
 	}
 }
 
