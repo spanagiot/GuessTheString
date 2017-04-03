@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-var nameToGuess = "O Romeo, Romeo, wherefore art thou Romeo?"
+var stringToGuess = "O Romeo, Romeo, wherefore art thou Romeo?"
 var population [1000]string
 var fitnessScore [1000]int
 var matingPool [1000]string
@@ -18,7 +18,7 @@ func main() {
 	var fitnessSum int = 0
 	var iterations int = 0
 	rand.Seed(time.Now().UTC().UnixNano())
-	fmt.Println("\tGenetic Algorithm - Guess the name")
+	fmt.Println("\tGenetic Algorithm - Guess the string")
 	initializePopulation(population[:])
 	for true {
 		iterations += 1
@@ -34,7 +34,7 @@ func main() {
 						maxFitness, population[i])
 				}
 			}
-			if fitnessScore[i] == len(nameToGuess) {
+			if fitnessScore[i] == len(stringToGuess) {
 				fmt.Printf("Found correct offspring: %s with index: %d ",
 					population[i], i)
 				fmt.Printf("after %d iterations\n", iterations)
@@ -83,7 +83,7 @@ func generateMatingPool(fitnessSum int) {
 func createOffspring(firstParent string, secondParent string) (string, string) {
 	firstOffspring := ""
 	secondOffspring := ""
-	for i := 0; i < len(nameToGuess); i++ {
+	for i := 0; i < len(stringToGuess); i++ {
 		if rand.Intn(2) == 1 {
 			// 1% mutation chance with random character in random position
 			if rand.Intn(1000) == 5 {
@@ -120,14 +120,14 @@ func createOffspring(firstParent string, secondParent string) (string, string) {
 	return firstOffspring, secondOffspring
 }
 
-func calculateAndReturnFitness(name string) int {
+func calculateAndReturnFitness(guessString string) int {
 	fitness := 0
-	for i := 0; i < len(nameToGuess); i++ {
-		if i > len(name) {
+	for i := 0; i < len(stringToGuess); i++ {
+		if i > len(stringToGuess) {
 			fitness = 0
 			break
 		}
-		if nameToGuess[i] == name[i] {
+		if stringToGuess[i] == guessString[i] {
 			fitness++
 		}
 	}
@@ -138,7 +138,7 @@ func initializePopulation(initialPopulation []string) {
 	var generatedName string
 	for i := 0; i < len(initialPopulation); i++ {
 		generatedName = ""
-		for j := 0; j < len(nameToGuess); j++ {
+		for j := 0; j < len(stringToGuess); j++ {
 			generatedName = s.Join([]string{generatedName,
 				string(rand.Intn(90) + 32)}, "")
 		}
