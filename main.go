@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-var stringToGuess = "I want to eat pizza"
+var stringToGuess = "O Romeo, Romeo, wherefore art thou Romeo?"
 var population [1000]string
 var fitnessScore [1000]int
 var matingPool [1000]string
