@@ -11,7 +11,6 @@ var nameToGuess = "I want to eat pizza"
 var population [1000]string
 var fitnessScore [1000]int
 var matingPool [1000]string
-var birthpool [1000]string
 
 func main() {
 	var maxFitness int = 0
@@ -59,11 +58,8 @@ func giveBirth() {
 		secondRandomParent = rand.Intn(len(matingPool))
 		firstOffspring, secondOffspring = createOffspring(
 			matingPool[firstRandomParent], matingPool[secondRandomParent])
-		birthpool[i] = firstOffspring
-		birthpool[i+1] = secondOffspring
-	}
-	for i := 0; i < len(population); i++ {
-		population[i] = birthpool[i]
+		population[i] = firstOffspring
+		population[i+1] = secondOffspring
 	}
 }
 
