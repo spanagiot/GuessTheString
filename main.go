@@ -83,38 +83,30 @@ func generateMatingPool(fitnessSum int) {
 func createOffspring(firstParent string, secondParent string) (string, string) {
 	firstOffspring := ""
 	secondOffspring := ""
-	for i := 0; i < len(nameToGuess); i++ {
-		if rand.Intn(2) == 1 {
-			// 1% mutation chance with random character in random position
-			if rand.Intn(1000) == 5 {
-				firstOffspring = s.Join([]string{firstOffspring,
-					string(rand.Intn(90) + 32)}, "")
-			} else {
-				firstOffspring = s.Join([]string{firstOffspring,
-					string(secondParent[i])}, "")
-			}
-			if rand.Intn(1000) == 6 {
-				secondOffspring = s.Join([]string{secondOffspring,
-					string(rand.Intn(90) + 32)}, "")
-			} else {
-				secondOffspring = s.Join([]string{secondOffspring,
-					string(firstParent[i])}, "")
-			}
-		} else {
-			if rand.Intn(1000) == 5 {
-				firstOffspring = s.Join([]string{firstOffspring,
-					string(rand.Intn(90) + 32)}, "")
-			} else {
-				firstOffspring = s.Join([]string{firstOffspring,
-					string(firstParent[i])}, "")
-			}
-			if rand.Intn(1000) == 6 {
-				secondOffspring = s.Join([]string{secondOffspring,
-					string(rand.Intn(90) + 32)}, "")
-			} else {
-				secondOffspring = s.Join([]string{secondOffspring,
-					string(secondParent[i])}, "")
-			}
+	var randomCutPoint int
+	randomCutPoint = rand.Intn(len(firstParent))
+	for i := 0; i < randomCutPoint; i++ {
+		if rand.Intn(100) == 5{
+			firstOffspring = s.Join([]string{firstOffspring,string(rand.Intn(90) + 32)}, "")
+		}else{
+			firstOffspring = s.Join([]string{firstOffspring,string(firstParent[i])}, "")
+		}
+		if rand.Intn(100) == 6{
+			secondOffspring = s.Join([]string{secondOffspring,string(rand.Intn(90) + 32)}, "")
+		}else{
+			secondOffspring = s.Join([]string{secondOffspring,string(secondParent[i])}, "")
+		}
+	}
+	for i := randomCutPoint; i < len(firstParent); i++ {
+		if rand.Intn(100) == 5{
+			firstOffspring = s.Join([]string{firstOffspring,string(rand.Intn(90) + 32)}, "")
+		}else{
+			firstOffspring = s.Join([]string{firstOffspring,string(secondParent[i])}, "")
+		}
+		if rand.Intn(100) == 6{
+			secondOffspring = s.Join([]string{secondOffspring,string(rand.Intn(90) + 32)}, "")
+		}else{
+			secondOffspring = s.Join([]string{secondOffspring,string(firstParent[i])}, "")
 		}
 	}
 	return firstOffspring, secondOffspring
