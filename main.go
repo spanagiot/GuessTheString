@@ -81,7 +81,7 @@ func createOffspring(firstParent string, secondParent string) (string, string) {
 	secondOffspring := ""
 	for i := 0; i < len(stringToGuess); i++ {
 		if rand.Intn(2) == 1 {
-			// 1% mutation chance with random character in random position
+			// 0.1% mutation chance with random character in random position
 			if rand.Intn(1000) == 5 {
 				firstOffspring = s.Join([]string{firstOffspring,
 					string(rand.Intn(90) + 32)}, "")
