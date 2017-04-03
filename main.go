@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-var nameToGuess = "I want to eat pizza"
+var stringToGuess = "I want to eat pizza"
 var population [1000]string
 var fitnessScore [1000]int
 var matingPool [1000]string
@@ -33,7 +33,7 @@ func main() {
 						maxFitness, population[i])
 				}
 			}
-			if fitnessScore[i] == len(nameToGuess) {
+			if fitnessScore[i] == len(stringToGuess) {
 				fmt.Printf("Found correct offspring: %s with index: %d ",
 					population[i], i)
 				fmt.Printf("after %d iterations\n", iterations)
@@ -110,12 +110,12 @@ func createOffspring(firstParent string, secondParent string) (string, string) {
 
 func calculateAndReturnFitness(name string) int {
 	fitness := 0
-	for i := 0; i < len(nameToGuess); i++ {
+	for i := 0; i < len(stringToGuess); i++ {
 		if i > len(name) {
 			fitness = 0
 			break
 		}
-		if nameToGuess[i] == name[i] {
+		if stringToGuess[i] == name[i] {
 			fitness++
 		}
 	}
@@ -126,7 +126,7 @@ func initializePopulation(initialPopulation []string) {
 	var generatedName string
 	for i := 0; i < len(initialPopulation); i++ {
 		generatedName = ""
-		for j := 0; j < len(nameToGuess); j++ {
+		for j := 0; j < len(stringToGuess); j++ {
 			generatedName = s.Join([]string{generatedName,
 				string(rand.Intn(90) + 32)}, "")
 		}
